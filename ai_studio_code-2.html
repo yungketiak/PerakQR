@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PerakQR – Preserving the Stories of Perak</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #B3862B; 
+  --gold-light: #FDF6E8;
+  --teal: #0A5C6B;
+  --teal-dark: #063A44;
+  --charcoal: #1A2E35;
+  --off-white: #FAF8F4;
+  --text-body: #2D3E46;
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'DM Sans', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: var(--font-body);
+  background: var(--off-white);
+  color: var(--text-body);
+  line-height: 1.6;
+  font-size: 18px; 
+  scroll-behavior: smooth;
+}
+
+/* ─── NAVIGATION ───────────────────────────────── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: white;
+  border-bottom: 2px solid var(--gold);
+  padding: 1rem 2rem;
+}
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--charcoal);
+  text-decoration: none;
+}
+.logo span { color: var(--gold); }
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--charcoal);
+  font-weight: 700;
+  margin-left: 2rem;
+  font-size: 16px;
+}
+.btn-nav {
+  background: var(--teal);
+  color: white !important;
+  padding: 10px 20px;
+  border-radius: 8px;
+}
+
+/* ─── HERO ─────────────────────────────────────── */
+.hero {
+  padding: 100px 2rem;
+  background: var(--charcoal);
+  color: white;
+  text-align: center;
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 8vw, 72px);
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+.hero h1 em { color: var(--gold); font-style: italic; }
+.hero p {
+  font-size: 22px;
+  max-width: 800px;
+  margin: 0 auto 2.5rem;
+  color: rgba(255,255,255,0.8);
+}
+
+/* ─── SECTION STYLING ──────────────────────────── */
+.section { padding: 80px 2rem; max-width: 1200px; margin: 0 auto; }
+.section-tag {
+  color: var(--gold);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  display: block;
+  margin-bottom: 10px;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: 42px;
+  margin-bottom: 30px;
+  color: var(--charcoal);
+}
+
+/* 1. FEATURED LISTINGS */
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+}
+.card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  transition: transform 0.3s;
+}
+.card:hover { transform: translateY(-5px); }
+.card-img { height: 250px; background: #eee; display: flex; align-items: center; justify-content: center; font-size: 60px; }
+.card-body { padding: 30px; }
+.card-body h3 { font-family: var(--font-display); font-size: 28px; margin-bottom: 10px; }
+
+/* 2. HERITAGE TRAIL MAP */
+.bg-map { background: var(--gold-light); }
+.map-wrapper {
+    position: relative;
+    width: 100%;
+    border-radius: 24px;
+    overflow: hidden;
+    border: 5px solid white;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    background: white;
+}
+.map-wrapper iframe {
+    display: block;
+    width: 100%;
+    height: 550px;
+    border: none;
+}
+
+/* 3. STORYTELLING & SPLITS */
+.split { display: flex; gap: 60px; align-items: center; flex-wrap: wrap; }
+.split > div { flex: 1; min-width: 300px; }
+.punchy-list { list-style: none; margin-top: 20px; }
+.punchy-list li {
+  margin-bottom: 20px;
+  padding-left: 40px;
+  position: relative;
+  font-weight: 500;
+}
+.punchy-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--teal);
+  font-weight: 900;
+  font-size: 24px;
+}
+
+/* 4. ELDERLY & SUPPORT */
+.bg-teal { background: var(--teal); color: white; }
+.bg-teal .section-title { color: white; }
+.bg-teal .section-tag { color: var(--gold-light); }
+
+.support-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 40px;
+}
+.support-item {
+  background: rgba(255,255,255,0.1);
+  padding: 25px;
+  border-radius: 15px;
+  border-left: 6px solid var(--gold);
+}
+.support-item h4 { font-size: 22px; margin-bottom: 10px; }
+.badge { background: var(--gold); color: var(--charcoal); padding: 4px 12px; border-radius: 5px; font-size: 14px; font-weight: 700; }
+
+/* 5. HOW IT WORKS */
+.how-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  text-align: center;
+}
+.step-num {
+  width: 60px; height: 60px; background: var(--teal); color: white; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;
+  font-weight: 900; font-size: 24px;
+}
+
+/* 6. SME CTA */
+.cta-box {
+  background: var(--gold); padding: 60px; border-radius: 30px; text-align: center; color: var(--charcoal);
+}
+.btn-lg {
+  background: var(--charcoal); color: white; padding: 20px 40px; border-radius: 12px;
+  font-weight: 900; text-decoration: none; display: inline-block; font-size: 20px;
+}
+
+/* PARTNERS */
+footer { background: #eee; padding: 60px 2rem; text-align: center; }
+.partners { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; margin-bottom: 40px; }
+.partners span { font-weight: 700; color: #666; }
+
+@media (max-width: 768px) {
+  .how-grid { grid-template-columns: 1fr 1fr; }
+  .map-wrapper iframe { height: 400px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">Perak<span>QR</span></a>
+    <div class="nav-links">
+      <a href="#stories">Stories</a>
+      <a href="#map">Trails</a>
+      <a href="#elderly">Elderly Support</a>
+      <a href="#sme" class="btn-nav">Register Business</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="section-tag">Every Business Has a Story</div>
+  <h1>Worth Telling, <br><em>Preserving,</em> & Scanning.</h1>
+  <p>Connecting Perak's living history to the digital world.</p>
+</section>
+
+<!-- 1. FEATURED LISTINGS -->
+<section class="section" id="stories">
+  <span class="section-tag">Ipoh’s Living Heritage</span>
+  <h2 class="section-title">Stories from Ipoh</h2>
+  <div class="featured-grid">
+    <div class="card">
+      <div class="card-img">🍛</div>
+      <div class="card-body">
+        <h3>Nasi Ganja Yong Suan</h3>
+        <p>"We haven't changed the recipe since 1953."</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img">🎨</div>
+      <div class="card-body">
+        <h3>Teh Ah Kow Batik</h3>
+        <p>Using 80-year-old copper blocks to stamp history.</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img">☕</div>
+      <div class="card-body">
+        <h3>Old Town Kopi Lim</h3>
+        <p>Hand-roasting beans every morning at 5 AM.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. HERITAGE TRAIL MAP -->
+<section class="section bg-map" id="map">
+  <span class="section-tag">Explore Layered History</span>
+  <h2 class="section-title">Heritage Trail Map</h2>
+  <p style="margin-bottom: 30px; max-width: 700px;">Locate the heart of Perak’s heritage. Use the interactive map below to discover trails through food, craft, and history.</p>
+  
+  <div class="map-wrapper">
+    <!-- EMBEDDED GOOGLE MAP -->
+    <iframe src="https://www.google.com/maps/d/embed?mid=1j7pmtZslbshm6jRQuQChq0i5cTpQSNM&ehbc=2E312F"></iframe>
+  </div>
+</section>
+
+<!-- 3. DIGITAL STORYTELLING -->
+<section class="section">
+  <div class="split">
+    <div style="background: white; padding: 40px; border-radius: 20px; border: 1px solid #ddd;">
+      <h3 style="font-family: var(--font-display); font-size: 32px; margin-bottom: 20px;">The Digital Treasure Chest</h3>
+      <ul class="punchy-list">
+        <li>Voice recordings of founders.</li>
+        <li>Historical family photos.</li>
+        <li>Authentic history.</li>
+      </ul>
+    </div>
+    <div>
+      <span class="section-tag">Not Just a Directory</span>
+      <h2 class="section-title">A Living Archive</h2>
+      <p>We document what Google Maps can't: the "why" behind the shop.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4. ELDERLY PROGRAMME -->
+<section class="section bg-teal" id="elderly">
+  <span class="section-tag">Our Mission</span>
+  <h2 class="section-title">Seniors as Protagonists</h2>
+  <p style="font-size: 22px; max-width: 800px; margin-bottom: 40px;">Aging entrepreneurs are the heroes of our economy, not just beneficiaries.</p>
+  
+  <div class="support-grid">
+    <div class="support-item">
+      <span class="badge">Literacy Training</span>
+      <h4>Ipoh Old Town Hub</h4>
+      <p>Digital classes for SME owners 60+.</p>
+    </div>
+    <div class="support-item">
+      <span class="badge">Aging-in-Place</span>
+      <h4>PAWE Perak Centre</h4>
+      <p>Community support for heritage traders.</p>
+    </div>
+    <div class="support-item">
+      <span class="badge">Digital Help</span>
+      <h4>UTC Ipoh</h4>
+      <p>One-on-one help to update your profile.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 5. HOW IT WORKS -->
+<section class="section">
+  <div style="text-align: center; margin-bottom: 50px;">
+    <h2 class="section-title">From Street Corner <br>to Digital History</h2>
+  </div>
+  <div class="how-grid">
+    <div><div class="step-num">1</div><h4>Register</h4></div>
+    <div><div class="step-num">2</div><h4>Interview</h4></div>
+    <div><div class="step-num">3</div><h4>Live QR</h4></div>
+    <div><div class="step-num">4</div><h4>Discover</h4></div>
+  </div>
+</section>
+
+<!-- 6. SME PORTAL -->
+<section class="section" id="sme">
+  <div class="cta-box">
+    <span class="section-tag" style="color: var(--teal);">For Business Owners</span>
+    <h2 style="margin-bottom: 20px;">Get Your Business on PerakQR</h2>
+    <p style="font-size: 20px; margin-bottom: 30px;">Every business has a story worth telling. Apply for your free heritage listing.</p>
+    <a href="#" class="btn-lg">Register Your Business →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="partners">
+    <span>Yayasan Hasanah</span>
+    <span>myHarapan</span>
+    <span>Visit Malaysia 2026</span>
+    <span>PAWE Perak</span>
+    <span>Tourism Perak</span>
+  </div>
+  <p>© 2026 PerakQR · A DiPurba Initiative</p>
+</footer>
+
+</body>
+</html>
