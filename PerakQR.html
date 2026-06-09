@@ -1,0 +1,2700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PerakQR – Discover the Soul of Perak</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #C9963A;
+  --gold-light: #F5E6C8;
+  --gold-dark: #8B6520;
+  --teal: #0A5C6B;
+  --teal-mid: #0D7A8A;
+  --teal-light: #E0F2F5;
+  --teal-pale: #F0F9FB;
+  --charcoal: #1A2E35;
+  --charcoal-mid: #2D4A55;
+  --off-white: #FAF8F4;
+  --warm-white: #FFFEF9;
+  --gray: #8A9BA3;
+  --gray-light: #E8EDEF;
+  --text-body: #3A4E56;
+  --text-muted: #7A8E96;
+  --red-accent: #C0392B;
+  --green-accent: #1A7A4A;
+  --cream: #FDF6E8;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--warm-white);
+  color: var(--text-body);
+  overflow-x: hidden;
+}
+
+/* ─── UTILITY ─────────────────────────────────── */
+.section-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 0.6rem;
+}
+.divider {
+  width: 48px;
+  height: 3px;
+  background: var(--gold);
+  border-radius: 2px;
+  margin: 1rem 0 1.5rem;
+}
+.divider.center { margin: 1rem auto 1.5rem; }
+
+/* ─── NAVIGATION ───────────────────────────────── */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(250, 248, 244, 0.94);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(201, 150, 58, 0.15);
+  transition: all 0.3s ease;
+}
+
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.nav-logo-icon {
+  width: 38px;
+  height: 38px;
+  background: var(--teal);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.nav-logo-icon::after {
+  content: '';
+  width: 14px;
+  height: 14px;
+  border: 2.5px solid var(--gold);
+  border-radius: 3px;
+  position: absolute;
+}
+
+.nav-logo-text {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--charcoal);
+  letter-spacing: -0.02em;
+}
+
+.nav-logo-text span { color: var(--gold); }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-body);
+  letter-spacing: 0.01em;
+  transition: color 0.2s;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: var(--gold);
+  transition: width 0.25s ease;
+}
+
+.nav-links a:hover { color: var(--teal); }
+.nav-links a:hover::after { width: 100%; }
+
+.nav-cta {
+  background: var(--teal);
+  color: white !important;
+  padding: 9px 22px;
+  border-radius: 6px;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.03em;
+  transition: background 0.2s !important;
+}
+
+.nav-cta::after { display: none !important; }
+.nav-cta:hover { background: var(--teal-mid) !important; color: white !important; }
+
+/* ─── HERO ─────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, #0A2830 0%, #0A5C6B 50%, #0D7A8A 100%);
+}
+
+/* Subtle noise texture */
+.hero-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: 0.5;
+}
+
+/* Geometric accent circles */
+.hero-circle-1 {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border: 1px solid rgba(201, 150, 58, 0.12);
+  border-radius: 50%;
+  top: -200px;
+  right: -100px;
+}
+
+.hero-circle-2 {
+  position: absolute;
+  width: 380px;
+  height: 380px;
+  border: 1px solid rgba(201, 150, 58, 0.08);
+  border-radius: 50%;
+  top: -50px;
+  right: 50px;
+}
+
+.hero-grid-lines {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.hero-bottom-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(to bottom, transparent, var(--warm-white));
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 8rem 2rem 6rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+.hero-left { }
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(201, 150, 58, 0.15);
+  border: 1px solid rgba(201, 150, 58, 0.3);
+  color: var(--gold-light);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 100px;
+  margin-bottom: 1.8rem;
+}
+
+.hero-badge-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.7); }
+}
+
+.hero-headline {
+  font-family: var(--font-display);
+  font-size: clamp(46px, 5.5vw, 68px);
+  font-weight: 900;
+  line-height: 1.05;
+  color: white;
+  letter-spacing: -0.025em;
+  margin-bottom: 1.5rem;
+}
+
+.hero-headline .italic-accent {
+  font-style: italic;
+  color: var(--gold-light);
+  font-weight: 400;
+}
+
+.hero-sub {
+  font-size: 17px;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.75;
+  max-width: 480px;
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  background: var(--gold);
+  color: var(--charcoal);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 14px 30px;
+  border-radius: 8px;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: transform 0.15s, box-shadow 0.15s;
+  display: inline-block;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(201, 150, 58, 0.35);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: rgba(255,255,255,0.85);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 14px 30px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.2);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: border-color 0.2s, color 0.2s;
+  display: inline-block;
+}
+
+.btn-ghost:hover {
+  border-color: rgba(255,255,255,0.45);
+  color: white;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 2.5rem;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.hero-stat-num {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  color: white;
+}
+
+.hero-stat-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.45);
+  margin-top: 2px;
+  letter-spacing: 0.05em;
+}
+
+/* Hero Right — QR Demo Card */
+.hero-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-phone-frame {
+  width: 320px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 28px;
+  padding: 20px;
+  backdrop-filter: blur(20px);
+  position: relative;
+}
+
+.phone-notch {
+  width: 80px;
+  height: 8px;
+  background: rgba(0,0,0,0.4);
+  border-radius: 10px;
+  margin: 0 auto 16px;
+}
+
+.phone-status {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 14px;
+  font-family: var(--font-mono);
+}
+
+.phone-screen {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.phone-map-area {
+  height: 160px;
+  background: linear-gradient(135deg, #E8F4F6 0%, #C5E8EF 100%);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Map dot pattern */
+.phone-map-area::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(10,92,107,0.12) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+.map-pin-cluster {
+  position: absolute;
+  display: flex;
+  gap: 8px;
+}
+
+.map-pin {
+  width: 28px;
+  height: 28px;
+  background: var(--teal);
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  border: 2.5px solid white;
+  box-shadow: 0 2px 8px rgba(10,92,107,0.4);
+  position: relative;
+}
+
+.map-pin::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.map-pin.gold { background: var(--gold); }
+
+.phone-listing {
+  padding: 14px;
+}
+
+.phone-listing-name {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--charcoal);
+  margin-bottom: 4px;
+}
+
+.phone-listing-sub {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+.phone-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.phone-tag {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 100px;
+  background: var(--teal-light);
+  color: var(--teal);
+}
+
+.phone-tag.gold {
+  background: var(--gold-light);
+  color: var(--gold-dark);
+}
+
+.phone-story-preview {
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  border-left: 2px solid var(--gold);
+  padding-left: 8px;
+  font-style: italic;
+}
+
+.phone-qr-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: var(--teal-pale);
+  border-top: 1px solid var(--gray-light);
+}
+
+.qr-mini {
+  width: 40px;
+  height: 40px;
+}
+
+.phone-scan-cta {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--teal);
+}
+
+/* Floating badge on phone */
+.phone-float-badge {
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  background: var(--gold);
+  color: var(--charcoal);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 100px;
+  letter-spacing: 0.05em;
+  box-shadow: 0 4px 12px rgba(201,150,58,0.4);
+  white-space: nowrap;
+}
+
+/* ─── HOW IT WORKS ──────────────────────────────── */
+.section-how {
+  padding: 100px 2rem;
+  background: var(--warm-white);
+}
+
+.section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-header {
+  max-width: 580px;
+  margin-bottom: 4rem;
+}
+
+.section-header h2 {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 3.5vw, 46px);
+  font-weight: 700;
+  color: var(--charcoal);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.section-header h2 em {
+  font-style: italic;
+  color: var(--teal);
+}
+
+.section-header p {
+  font-size: 16px;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-top: 1rem;
+}
+
+.how-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  position: relative;
+}
+
+.how-connector {
+  position: absolute;
+  top: 52px;
+  left: calc(12.5% + 20px);
+  right: calc(12.5% + 20px);
+  height: 1px;
+  background: linear-gradient(to right, var(--gold-light), var(--gold), var(--gold), var(--gold-light));
+  z-index: 0;
+}
+
+.how-step {
+  padding: 2.5rem 1.5rem 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.how-step-num {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--teal);
+  color: white;
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.how-step:nth-child(2) .how-step-num { background: var(--gold); color: var(--charcoal); }
+.how-step:nth-child(3) .how-step-num { background: var(--charcoal-mid); }
+.how-step:nth-child(5) .how-step-num { background: var(--green-accent); }
+
+.how-step h3 {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--charcoal);
+  margin-bottom: 0.7rem;
+  letter-spacing: -0.01em;
+}
+
+.how-step p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* ─── EXPLORE CATEGORIES ───────────────────────── */
+.section-explore {
+  padding: 100px 2rem;
+  background: var(--off-white);
+  position: relative;
+  overflow: hidden;
+}
+
+.section-explore::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  right: -200px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(10,92,107,0.04) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.categories-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 3.5rem;
+}
+
+.view-all {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--teal);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: gap 0.2s;
+}
+
+.view-all:hover { gap: 10px; }
+
+.view-all-arrow { font-size: 16px; }
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+
+.cat-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--gray-light);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+  display: block;
+}
+
+.cat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(10,46,53,0.1);
+}
+
+.cat-card-img {
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+.cat-card:nth-child(1) .cat-card-img { background: linear-gradient(135deg, #E8F4F6, #C5E8EF); }
+.cat-card:nth-child(2) .cat-card-img { background: linear-gradient(135deg, #FDF6E8, #F5E6C8); }
+.cat-card:nth-child(3) .cat-card-img { background: linear-gradient(135deg, #F0F9FB, #D5F0F5); }
+.cat-card:nth-child(4) .cat-card-img { background: linear-gradient(135deg, #EAF8EE, #C5EAD0); }
+.cat-card:nth-child(5) .cat-card-img { background: linear-gradient(135deg, #F5EDF8, #E5D0EE); }
+
+.cat-icon-svg {
+  width: 64px;
+  height: 64px;
+}
+
+.cat-card-body {
+  padding: 14px 16px 16px;
+}
+
+.cat-card-title {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--charcoal);
+  margin-bottom: 4px;
+  letter-spacing: -0.01em;
+}
+
+.cat-card-count {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ─── FEATURED LISTINGS ─────────────────────────── */
+.section-listings {
+  padding: 100px 2rem;
+  background: var(--warm-white);
+}
+
+.listings-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+}
+
+.listing-card {
+  background: white;
+  border: 1px solid var(--gray-light);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+
+.listing-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 50px rgba(10,46,53,0.1);
+}
+
+.listing-card.featured {
+  grid-column: span 1;
+  background: var(--charcoal);
+  color: white;
+}
+
+.listing-img-area {
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+}
+
+.listing-img-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 56px;
+}
+
+.listing-card:nth-child(1) .listing-img-placeholder { background: linear-gradient(135deg, #0A5C6B22, #0D7A8A44); }
+.listing-card:nth-child(2) .listing-img-placeholder { background: linear-gradient(135deg, #C9963A22, #F5E6C844); }
+.listing-card:nth-child(3) .listing-img-placeholder { background: linear-gradient(135deg, #1A2E3522, #2D4A5544); }
+
+.listing-year-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: var(--gold);
+  color: var(--charcoal);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 100px;
+  letter-spacing: 0.05em;
+}
+
+.listing-type-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: rgba(255,255,255,0.92);
+  color: var(--teal);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 100px;
+  letter-spacing: 0.04em;
+}
+
+.listing-body {
+  padding: 20px;
+}
+
+.listing-category {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.listing-card.featured .listing-category {
+  color: rgba(255,255,255,0.5);
+}
+
+.listing-name {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--charcoal);
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+  line-height: 1.25;
+}
+
+.listing-card.featured .listing-name {
+  color: white;
+}
+
+.listing-story {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 16px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.listing-card.featured .listing-story {
+  color: rgba(255,255,255,0.55);
+}
+
+.listing-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  border-top: 1px solid var(--gray-light);
+}
+
+.listing-card.featured .listing-footer {
+  border-color: rgba(255,255,255,0.1);
+}
+
+.listing-owner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.listing-owner-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--teal-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--teal);
+}
+
+.listing-card.featured .listing-owner-avatar {
+  background: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.7);
+}
+
+.listing-owner-name {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-body);
+}
+
+.listing-card.featured .listing-owner-name {
+  color: rgba(255,255,255,0.7);
+}
+
+.listing-scan-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--teal);
+  background: var(--teal-light);
+  padding: 7px 14px;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.listing-card.featured .listing-scan-btn {
+  background: rgba(201,150,58,0.25);
+  color: var(--gold-light);
+}
+
+.listing-scan-btn:hover {
+  background: var(--teal);
+  color: white;
+}
+
+/* ─── STORYTELLING SECTION ──────────────────────── */
+.section-story {
+  padding: 100px 2rem;
+  background: var(--charcoal);
+  position: relative;
+  overflow: hidden;
+}
+
+.section-story::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 20% 50%, rgba(13,122,138,0.15) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 20%, rgba(201,150,58,0.08) 0%, transparent 50%);
+}
+
+.story-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+.story-left {}
+
+.story-left .section-tag { color: var(--gold); }
+
+.story-left h2 {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 3.5vw, 48px);
+  font-weight: 700;
+  color: white;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.2rem;
+}
+
+.story-left h2 em { 
+  font-style: italic;
+  color: var(--gold-light);
+  font-weight: 400;
+}
+
+.story-left > p {
+  font-size: 16px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.8;
+  margin-bottom: 2.5rem;
+}
+
+.story-features {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.story-feature {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.story-feature-icon {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  background: rgba(201, 150, 58, 0.12);
+  border: 1px solid rgba(201, 150, 58, 0.2);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+}
+
+.story-feature-icon svg {
+  width: 16px;
+  height: 16px;
+  stroke: var(--gold);
+}
+
+.story-feature h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 3px;
+}
+
+.story-feature p {
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.65;
+}
+
+/* Story card on right */
+.story-right {}
+
+.story-card-stack {
+  position: relative;
+}
+
+.story-card-back {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  right: -16px;
+  bottom: -16px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 20px;
+}
+
+.story-card-main {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+.story-card-header {
+  background: linear-gradient(135deg, var(--teal), var(--teal-mid));
+  padding: 28px 28px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.story-card-header::after {
+  content: '';
+  position: absolute;
+  bottom: -30px;
+  right: -30px;
+  width: 100px;
+  height: 100px;
+  border: 20px solid rgba(255,255,255,0.06);
+  border-radius: 50%;
+}
+
+.story-card-eyebrow {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 8px;
+}
+
+.story-card-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: white;
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+
+.story-card-meta {
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+}
+
+.story-card-content {
+  padding: 24px 28px;
+}
+
+.story-pullquote {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-style: italic;
+  color: var(--charcoal);
+  line-height: 1.6;
+  border-left: 3px solid var(--gold);
+  padding-left: 16px;
+  margin-bottom: 18px;
+}
+
+.story-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.story-detail {
+  background: var(--teal-pale);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.story-detail-label {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--teal);
+  margin-bottom: 4px;
+}
+
+.story-detail-val {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--charcoal);
+}
+
+.story-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 28px;
+  background: var(--off-white);
+  border-top: 1px solid var(--gray-light);
+}
+
+.story-owner-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.story-owner-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--gold-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--gold-dark);
+}
+
+.story-owner-name { font-size: 13px; font-weight: 600; color: var(--charcoal); }
+.story-owner-since { font-size: 11px; color: var(--text-muted); }
+
+.story-qr-btn {
+  background: var(--teal);
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.story-qr-btn:hover { background: var(--teal-mid); }
+
+/* ─── IMPACT NUMBERS ──────────────────────────── */
+.section-impact {
+  padding: 80px 2rem;
+  background: var(--cream);
+  border-top: 1px solid rgba(201,150,58,0.15);
+  border-bottom: 1px solid rgba(201,150,58,0.15);
+}
+
+.impact-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+}
+
+.impact-item {
+  text-align: center;
+  padding: 2rem;
+  position: relative;
+}
+
+.impact-item + .impact-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 40px;
+  width: 1px;
+  background: rgba(201,150,58,0.25);
+}
+
+.impact-num {
+  font-family: var(--font-display);
+  font-size: 52px;
+  font-weight: 900;
+  color: var(--teal);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.impact-num sup {
+  font-size: 24px;
+  vertical-align: super;
+  color: var(--gold);
+}
+
+.impact-label {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+/* ─── MAP SECTION ──────────────────────────────── */
+.section-map {
+  padding: 100px 2rem;
+  background: var(--warm-white);
+}
+
+.map-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.map-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 2rem;
+}
+
+.map-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: white;
+  border: 1px solid var(--gray-light);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.map-legend-item:hover, .map-legend-item.active {
+  border-color: var(--teal);
+  box-shadow: 0 4px 16px rgba(10,92,107,0.1);
+}
+
+.map-legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.map-legend-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--charcoal);
+  flex: 1;
+}
+
+.map-legend-count {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 100px;
+  background: var(--teal-light);
+  color: var(--teal);
+}
+
+.map-visual {
+  background: var(--teal-pale);
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid var(--gray-light);
+  position: relative;
+}
+
+.map-svg-container {
+  padding: 30px;
+}
+
+/* ─── SME PORTAL CTA ────────────────────────────── */
+.section-sme {
+  padding: 100px 2rem;
+  background: var(--off-white);
+}
+
+.sme-card {
+  background: linear-gradient(135deg, var(--teal) 0%, #0A3A46 100%);
+  border-radius: 28px;
+  padding: 70px 70px;
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.sme-card::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 500px;
+  height: 500px;
+  border: 60px solid rgba(255,255,255,0.03);
+  border-radius: 50%;
+}
+
+.sme-card::after {
+  content: '';
+  position: absolute;
+  bottom: -60px;
+  left: 30%;
+  width: 300px;
+  height: 300px;
+  border: 40px solid rgba(201,150,58,0.06);
+  border-radius: 50%;
+}
+
+.sme-left { position: relative; z-index: 1; }
+.sme-left .section-tag { color: var(--gold); }
+
+.sme-left h2 {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 700;
+  color: white;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+
+.sme-left h2 em {
+  font-style: italic;
+  color: var(--gold-light);
+  font-weight: 400;
+}
+
+.sme-left p {
+  font-size: 15px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.75;
+  margin-bottom: 2.5rem;
+}
+
+.sme-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn-sme-primary {
+  background: var(--gold);
+  color: var(--charcoal);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 14px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.btn-sme-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(201,150,58,0.4);
+}
+
+.btn-sme-ghost {
+  background: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.8);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 14px 28px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.15);
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.btn-sme-ghost:hover {
+  background: rgba(255,255,255,0.18);
+  color: white;
+}
+
+.sme-right {
+  position: relative;
+  z-index: 1;
+}
+
+.sme-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.sme-step {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding-bottom: 24px;
+  position: relative;
+}
+
+.sme-step:last-child { padding-bottom: 0; }
+
+.sme-step::before {
+  content: '';
+  position: absolute;
+  left: 19px;
+  top: 38px;
+  bottom: 0;
+  width: 1px;
+  background: rgba(255,255,255,0.1);
+}
+
+.sme-step:last-child::before { display: none; }
+
+.sme-step-num {
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--gold-light);
+}
+
+.sme-step h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 3px;
+}
+
+.sme-step p {
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.6;
+}
+
+/* ─── ELDERLY PROGRAMME ──────────────────────────── */
+.section-elderly {
+  padding: 100px 2rem;
+  background: var(--warm-white);
+}
+
+.elderly-layout {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+.elderly-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.elderly-card {
+  background: white;
+  border: 1px solid var(--gray-light);
+  border-radius: 16px;
+  padding: 20px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.elderly-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(10,46,53,0.08);
+}
+
+.elderly-card.span2 {
+  grid-column: span 2;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px;
+  align-items: center;
+  background: var(--teal);
+  color: white;
+  border: none;
+}
+
+.elderly-card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.elderly-card:nth-child(1) .elderly-card-icon { background: var(--teal-light); }
+.elderly-card:nth-child(2) .elderly-card-icon { background: var(--gold-light); }
+.elderly-card:nth-child(3) .elderly-card-icon { background: #EAF8EE; }
+
+.elderly-card-icon svg { width: 22px; height: 22px; }
+.elderly-card:nth-child(1) .elderly-card-icon svg { stroke: var(--teal); }
+.elderly-card:nth-child(2) .elderly-card-icon svg { stroke: var(--gold-dark); }
+.elderly-card:nth-child(3) .elderly-card-icon svg { stroke: var(--green-accent); }
+
+.elderly-card h4 {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--charcoal);
+  margin-bottom: 6px;
+}
+
+.elderly-card p {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+.elderly-card.span2 .span2-icon {
+  width: 56px;
+  height: 56px;
+  min-width: 56px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.elderly-card.span2 .span2-icon svg {
+  width: 28px;
+  height: 28px;
+  stroke: rgba(255,255,255,0.9);
+}
+
+.elderly-card.span2 h4 {
+  color: white;
+  font-size: 17px;
+}
+
+.elderly-card.span2 p {
+  color: rgba(255,255,255,0.6);
+  font-size: 13px;
+}
+
+/* ─── PARTNERS ──────────────────────────────────── */
+.section-partners {
+  padding: 70px 2rem;
+  background: var(--off-white);
+  text-align: center;
+}
+
+.partners-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+}
+
+.partners-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.partner-badge {
+  background: white;
+  border: 1px solid var(--gray-light);
+  border-radius: 12px;
+  padding: 14px 28px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.03em;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.partner-badge:hover {
+  color: var(--teal);
+  border-color: var(--teal);
+}
+
+/* ─── FOOTER ─────────────────────────────────────── */
+footer {
+  background: var(--charcoal);
+  padding: 70px 2rem 30px;
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 3rem;
+  padding-bottom: 50px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.footer-brand {}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1.2rem;
+}
+
+.footer-logo-box {
+  width: 36px;
+  height: 36px;
+  background: var(--teal);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-logo-text {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: white;
+}
+
+.footer-logo-text span { color: var(--gold); }
+
+.footer-tagline {
+  font-size: 13px;
+  color: rgba(255,255,255,0.35);
+  line-height: 1.75;
+  max-width: 260px;
+  margin-bottom: 1.5rem;
+}
+
+.footer-vm26 {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(201,150,58,0.12);
+  border: 1px solid rgba(201,150,58,0.2);
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 0.06em;
+}
+
+.footer-col h5 {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 1.2rem;
+}
+
+.footer-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-col a {
+  text-decoration: none;
+  font-size: 14px;
+  color: rgba(255,255,255,0.5);
+  transition: color 0.2s;
+}
+
+.footer-col a:hover { color: rgba(255,255,255,0.85); }
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 28px;
+}
+
+.footer-copy {
+  font-size: 12px;
+  color: rgba(255,255,255,0.25);
+}
+
+.footer-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.footer-links a {
+  text-decoration: none;
+  font-size: 12px;
+  color: rgba(255,255,255,0.25);
+  transition: color 0.2s;
+}
+
+.footer-links a:hover { color: rgba(255,255,255,0.5); }
+
+/* ─── SCROLL ANIMATIONS ─────────────────────────── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-up-delay-1 { transition-delay: 0.1s; }
+.fade-up-delay-2 { transition-delay: 0.2s; }
+.fade-up-delay-3 { transition-delay: 0.3s; }
+.fade-up-delay-4 { transition-delay: 0.4s; }
+
+/* Search bar */
+.hero-search {
+  margin-top: 2.5rem;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  max-width: 480px;
+}
+
+.hero-search input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 14px 18px;
+  font-size: 14px;
+  color: white;
+  font-family: var(--font-body);
+}
+
+.hero-search input::placeholder {
+  color: rgba(255,255,255,0.35);
+}
+
+.hero-search-btn {
+  background: var(--gold);
+  border: none;
+  padding: 10px 18px;
+  margin: 5px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--charcoal);
+  font-size: 13px;
+  font-weight: 700;
+  font-family: var(--font-body);
+  transition: opacity 0.15s;
+}
+
+.hero-search-btn:hover { opacity: 0.88; }
+
+/* Announcement bar */
+.announce-bar {
+  background: var(--teal);
+  padding: 10px 2rem;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.85);
+  letter-spacing: 0.02em;
+}
+
+.announce-bar a {
+  color: var(--gold-light);
+  text-decoration: none;
+  font-weight: 700;
+  margin-left: 8px;
+}
+
+/* Trail map color dots */
+.dot-heritage { background: var(--teal); }
+.dot-food { background: var(--gold); }
+.dot-accommodation { background: var(--green-accent); }
+.dot-wellness { background: #9B59B6; }
+.dot-training { background: #E67E22; }
+
+</style>
+</head>
+<body>
+
+<!-- Announce Bar -->
+<div class="announce-bar">
+  🇲🇾 Part of <strong>Visit Malaysia 2026</strong> — Discover Perak's Living Heritage
+  <a href="#">Learn More →</a>
+</div>
+
+<!-- Navigation -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-icon"></div>
+      <span class="nav-logo-text">Perak<span>QR</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#explore">Explore</a></li>
+      <li><a href="#stories">Stories</a></li>
+      <li><a href="#trails">Heritage Trails</a></li>
+      <li><a href="#elderly">Elderly Programme</a></li>
+      <li><a href="#sme">For SMEs</a></li>
+      <li><a href="#sme" class="nav-cta">Register Your Business</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="hero-grid-lines"></div>
+    <div class="hero-circle-1"></div>
+    <div class="hero-circle-2"></div>
+  </div>
+  <div class="hero-bottom-fade"></div>
+
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-badge">
+        <div class="hero-badge-dot"></div>
+        Launching · Ipoh · Perak
+      </div>
+
+      <h1 class="hero-headline">
+        Every Business Has<br>
+        a <span class="italic-accent">Story</span><br>
+        Worth Telling
+      </h1>
+
+      <p class="hero-sub">
+        PerakQR connects the soul of Perak's local heritage businesses — 
+        their history, their craft, their people — with visitors who want 
+        more than just a destination.
+      </p>
+
+      <div class="hero-search">
+        <input type="text" placeholder="Search Ipoh hawkers, batik, roti, kopitiam…">
+        <button class="hero-search-btn">Discover</button>
+      </div>
+
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-num">250<span style="color:var(--gold);font-size:18px;">+</span></div>
+          <div class="hero-stat-label">Heritage SMEs</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">15</div>
+          <div class="hero-stat-label">Neighbourhoods</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">VM<span style="color:var(--gold);font-size:18px;">26</span></div>
+          <div class="hero-stat-label">Official Partner</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-phone-frame">
+        <div class="phone-float-badge">✦ Live on PerakQR</div>
+        <div class="phone-notch"></div>
+        <div class="phone-status">
+          <span>9:41</span>
+          <span>perakqr.my</span>
+          <span>●●●</span>
+        </div>
+        <div class="phone-screen">
+          <div class="phone-map-area">
+            <div class="map-pin-cluster">
+              <div class="map-pin"></div>
+              <div class="map-pin gold" style="margin-top:18px;margin-left:-5px;"></div>
+              <div class="map-pin" style="margin-top:8px;"></div>
+            </div>
+          </div>
+          <div class="phone-listing">
+            <div class="phone-listing-name">Nasi Ganja Yong Suan</div>
+            <div class="phone-listing-sub">Jalan Dato Maharajalela, Ipoh · Est. 1953</div>
+            <div class="phone-tags">
+              <span class="phone-tag">Heritage Food</span>
+              <span class="phone-tag gold">Elderly-Owned</span>
+            </div>
+            <div class="phone-story-preview">
+              "My grandfather started selling nasi ganja from a cart here in 1953. The recipe has never changed in 70 years…"
+            </div>
+          </div>
+          <div class="phone-qr-row">
+            <!-- Mini QR SVG -->
+            <svg class="qr-mini" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="2" y="2" width="16" height="16" rx="2" fill="#0A5C6B"/>
+              <rect x="5" y="5" width="10" height="10" rx="1" fill="white"/>
+              <rect x="7" y="7" width="6" height="6" rx="0.5" fill="#0A5C6B"/>
+              <rect x="22" y="2" width="16" height="16" rx="2" fill="#0A5C6B"/>
+              <rect x="25" y="5" width="10" height="10" rx="1" fill="white"/>
+              <rect x="27" y="7" width="6" height="6" rx="0.5" fill="#0A5C6B"/>
+              <rect x="2" y="22" width="16" height="16" rx="2" fill="#0A5C6B"/>
+              <rect x="5" y="25" width="10" height="10" rx="1" fill="white"/>
+              <rect x="7" y="27" width="6" height="6" rx="0.5" fill="#0A5C6B"/>
+              <rect x="22" y="22" width="4" height="4" fill="#0A5C6B"/>
+              <rect x="28" y="22" width="4" height="4" fill="#0A5C6B"/>
+              <rect x="34" y="22" width="4" height="4" fill="#0A5C6B"/>
+              <rect x="22" y="28" width="4" height="4" fill="#0A5C6B"/>
+              <rect x="28" y="28" width="4" height="4" fill="#0A5C6B"/>
+              <rect x="34" y="34" width="4" height="4" fill="#0A5C6B"/>
+            </svg>
+            <div class="phone-scan-cta">Scan for full story →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section class="section-how" id="how">
+  <div class="section-inner">
+    <div class="section-header fade-up">
+      <div class="section-tag">How It Works</div>
+      <h2>From Street Corner to<br><em>Digital Story</em></h2>
+      <div class="divider"></div>
+      <p>PerakQR turns the lived history of every heritage business into a digital experience — one scan at a time.</p>
+    </div>
+
+    <div class="how-steps">
+      <div class="how-connector"></div>
+
+      <div class="how-step fade-up">
+        <div class="how-step-num">01</div>
+        <h3>SME Registers</h3>
+        <p>Local business owners — particularly elderly operators — register their shop, stall, or craft on PerakQR with their story, history, and offerings.</p>
+      </div>
+
+      <div class="how-step fade-up fade-up-delay-1">
+        <div class="how-step-num">02</div>
+        <h3>Story is Crafted</h3>
+        <p>Our content team conducts an on-ground interview to document the authentic narrative: founding year, family legacy, cultural significance, and what makes them irreplaceable.</p>
+      </div>
+
+      <div class="how-step fade-up fade-up-delay-2">
+        <div class="how-step-num">03</div>
+        <h3>QR Goes Live</h3>
+        <p>A unique QR code is generated and placed at the business. Scan it and instantly access the full digital profile — photos, story, menu, and directions.</p>
+      </div>
+
+      <div class="how-step fade-up fade-up-delay-3">
+        <div class="how-step-num">04</div>
+        <h3>Visitors Discover</h3>
+        <p>Tourists and locals browse PerakQR to plan their visits, find hidden gems, and experience Perak's heritage through the eyes of the people who built it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Explore Categories -->
+<section class="section-explore" id="explore">
+  <div class="section-inner">
+    <div class="categories-header">
+      <div class="fade-up">
+        <div class="section-tag">Browse Ipoh</div>
+        <h2 style="font-family:var(--font-display);font-size:clamp(28px,3vw,40px);font-weight:700;color:var(--charcoal);letter-spacing:-0.02em;">Explore by Category</h2>
+      </div>
+      <a href="#" class="view-all">
+        View All Categories <span class="view-all-arrow">→</span>
+      </a>
+    </div>
+
+    <div class="categories-grid">
+
+      <!-- Heritage & Attractions -->
+      <a href="#" class="cat-card fade-up">
+        <div class="cat-card-img">
+          <svg class="cat-icon-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="36" width="48" height="20" rx="2" fill="#0A5C6B" opacity="0.15"/>
+            <rect x="14" y="28" width="36" height="10" rx="1" fill="#0A5C6B" opacity="0.25"/>
+            <polygon points="32,8 8,30 56,30" fill="#0A5C6B" opacity="0.7"/>
+            <rect x="26" y="44" width="12" height="12" rx="1" fill="#0A5C6B" opacity="0.5"/>
+            <rect x="16" y="38" width="8" height="6" rx="1" fill="#0D7A8A" opacity="0.5"/>
+            <rect x="40" y="38" width="8" height="6" rx="1" fill="#0D7A8A" opacity="0.5"/>
+          </svg>
+        </div>
+        <div class="cat-card-body">
+          <div class="cat-card-title">Heritage & Attractions</div>
+          <div class="cat-card-count">48 places</div>
+        </div>
+      </a>
+
+      <!-- Food & Hawkers -->
+      <a href="#" class="cat-card fade-up fade-up-delay-1">
+        <div class="cat-card-img">
+          <svg class="cat-icon-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="32" cy="42" rx="22" ry="8" fill="#C9963A" opacity="0.25"/>
+            <path d="M16 38 Q32 20 48 38" stroke="#C9963A" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.7"/>
+            <circle cx="32" cy="28" r="10" fill="#C9963A" opacity="0.2"/>
+            <path d="M26 28 Q29 22 32 28 Q35 22 38 28" stroke="#C9963A" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.9"/>
+            <line x1="32" y1="16" x2="32" y2="20" stroke="#C9963A" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+          </svg>
+        </div>
+        <div class="cat-card-body">
+          <div class="cat-card-title">Food & Hawkers</div>
+          <div class="cat-card-count">92 listings</div>
+        </div>
+      </a>
+
+      <!-- Craft & Trades -->
+      <a href="#" class="cat-card fade-up fade-up-delay-2">
+        <div class="cat-card-img">
+          <svg class="cat-icon-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="18" y="20" width="28" height="28" rx="3" fill="#0D7A8A" opacity="0.15" stroke="#0D7A8A" stroke-width="1.5" opacity="0.5"/>
+            <path d="M24 32 L28 36 L40 24" stroke="#0D7A8A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+            <circle cx="44" cy="18" r="6" fill="#C9963A" opacity="0.2" stroke="#C9963A" stroke-width="1.5" opacity="0.6"/>
+            <line x1="41" y1="18" x2="47" y2="18" stroke="#C9963A" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+            <line x1="44" y1="15" x2="44" y2="21" stroke="#C9963A" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+          </svg>
+        </div>
+        <div class="cat-card-body">
+          <div class="cat-card-title">Craft & Heritage Trades</div>
+          <div class="cat-card-count">35 artisans</div>
+        </div>
+      </a>
+
+      <!-- Accommodation -->
+      <a href="#" class="cat-card fade-up fade-up-delay-3">
+        <div class="cat-card-img">
+          <svg class="cat-icon-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="28" width="44" height="26" rx="2" fill="#1A7A4A" opacity="0.15"/>
+            <polygon points="32,10 10,30 54,30" fill="#1A7A4A" opacity="0.4"/>
+            <rect x="26" y="42" width="12" height="12" rx="1" fill="#1A7A4A" opacity="0.5"/>
+            <rect x="14" y="36" width="8" height="6" rx="1" fill="#1A7A4A" opacity="0.35"/>
+            <rect x="42" y="36" width="8" height="6" rx="1" fill="#1A7A4A" opacity="0.35"/>
+            <circle cx="32" cy="24" r="4" fill="#1A7A4A" opacity="0.3" stroke="#1A7A4A" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="cat-card-body">
+          <div class="cat-card-title">Stay & Heritage Lodges</div>
+          <div class="cat-card-count">24 properties</div>
+        </div>
+      </a>
+
+      <!-- Education & Training -->
+      <a href="#" class="cat-card fade-up fade-up-delay-4">
+        <div class="cat-card-img">
+          <svg class="cat-icon-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M32 14 L54 24 L32 34 L10 24 Z" fill="#9B59B6" opacity="0.2" stroke="#9B59B6" stroke-width="1.5" opacity="0.6"/>
+            <path d="M18 30 L18 44 Q32 50 46 44 L46 30" stroke="#9B59B6" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.7"/>
+            <line x1="54" y1="24" x2="54" y2="38" stroke="#9B59B6" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+            <circle cx="54" cy="40" r="3" fill="#9B59B6" opacity="0.6"/>
+          </svg>
+        </div>
+        <div class="cat-card-body">
+          <div class="cat-card-title">Education & Training</div>
+          <div class="cat-card-count">18 centres</div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- Featured Listings -->
+<section class="section-listings" id="listings">
+  <div class="section-inner">
+    <div class="section-header fade-up" style="margin-bottom:2.5rem;">
+      <div class="section-tag">Featured Listings</div>
+      <h2 style="font-family:var(--font-display);font-size:clamp(28px,3vw,40px);font-weight:700;color:var(--charcoal);letter-spacing:-0.02em;">Stories from<br><em style="font-style:italic;color:var(--teal);">Ipoh's Living Heritage</em></h2>
+    </div>
+
+    <div class="listings-layout">
+
+      <div class="listing-card fade-up">
+        <div class="listing-img-area">
+          <div class="listing-img-placeholder">🍛</div>
+          <div class="listing-year-badge">Est. 1953</div>
+          <div class="listing-type-badge">Heritage Food</div>
+        </div>
+        <div class="listing-body">
+          <div class="listing-category">Food & Hawkers</div>
+          <div class="listing-name">Nasi Ganja Yong Suan</div>
+          <div class="listing-story">Tucked along Jalan Dato Maharajalela, this family stall has fed three generations of Ipoh residents. The recipe for the aromatic nasi ganja rice — never written down — has been passed from grandfather to grandson unchanged since 1953.</div>
+          <div class="listing-footer">
+            <div class="listing-owner">
+              <div class="listing-owner-avatar">YS</div>
+              <div class="listing-owner-name">Yong Suan Family</div>
+            </div>
+            <a href="#" class="listing-scan-btn">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3m0 4v-4m4 0h-4"/></svg>
+              View Story
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="listing-card featured fade-up fade-up-delay-1">
+        <div class="listing-img-area">
+          <div class="listing-img-placeholder" style="background: linear-gradient(135deg,#0A2830,#0A5C6B);">🎨</div>
+          <div class="listing-year-badge">Est. 1938</div>
+          <div class="listing-type-badge" style="background:rgba(201,150,58,0.85);color:var(--charcoal);">Heritage Craft</div>
+        </div>
+        <div class="listing-body">
+          <div class="listing-category">Craft & Heritage Trades</div>
+          <div class="listing-name">Teh Ah Kow Batik House</div>
+          <div class="listing-story">One of the last remaining batik workshops in Perak, operating from the same shophouse since the pre-independence era. Each piece hand-stamped using copper blocks cast by the founder himself — tools now 80 years old.</div>
+          <div class="listing-footer">
+            <div class="listing-owner">
+              <div class="listing-owner-avatar">TK</div>
+              <div class="listing-owner-name">Teh Family · 3rd Gen</div>
+            </div>
+            <a href="#" class="listing-scan-btn">View Story</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="listing-card fade-up fade-up-delay-2">
+        <div class="listing-img-area">
+          <div class="listing-img-placeholder">☕</div>
+          <div class="listing-year-badge">Est. 1967</div>
+          <div class="listing-type-badge">Kopitiam</div>
+        </div>
+        <div class="listing-body">
+          <div class="listing-category">Food & Hawkers</div>
+          <div class="listing-name">Old Town Kopi Lim</div>
+          <div class="listing-story">A cornerstone of Plan Station Road since 1967. The owner, now 74, still roasts coffee beans himself every morning at 5am — a ritual unchanged since he inherited the shop from his late father.</div>
+          <div class="listing-footer">
+            <div class="listing-owner">
+              <div class="listing-owner-avatar">LL</div>
+              <div class="listing-owner-name">Uncle Lim</div>
+            </div>
+            <a href="#" class="listing-scan-btn">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3m0 4v-4m4 0h-4"/></svg>
+              View Story
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Impact Numbers -->
+<section class="section-impact">
+  <div class="section-inner">
+    <div class="impact-grid">
+      <div class="impact-item fade-up">
+        <div class="impact-num">250<sup>+</sup></div>
+        <div class="impact-label">Heritage SMEs Listed</div>
+      </div>
+      <div class="impact-item fade-up fade-up-delay-1">
+        <div class="impact-num">15</div>
+        <div class="impact-label">Neighbourhoods Covered</div>
+      </div>
+      <div class="impact-item fade-up fade-up-delay-2">
+        <div class="impact-num">80<sup>+</sup></div>
+        <div class="impact-label">Elderly Entrepreneurs</div>
+      </div>
+      <div class="impact-item fade-up fade-up-delay-3">
+        <div class="impact-num">12<sup>k</sup></div>
+        <div class="impact-label">Scans This Month</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Storytelling Feature -->
+<section class="section-story" id="stories">
+  <div class="section-inner">
+    <div class="story-grid">
+      <div class="story-left fade-up">
+        <div class="section-tag">Digital Storytelling</div>
+        <h2>Not Just a Directory.<br>A <em>Living Archive</em>.</h2>
+        <div class="divider"></div>
+        <p>Every PerakQR listing is a story — the kind that gets lost when a shop closes or an owner passes on. We document what Google Maps can't: the why behind the what.</p>
+
+        <div class="story-features">
+          <div class="story-feature">
+            <div class="story-feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
+              </svg>
+            </div>
+            <div>
+              <h4>On-ground Story Collection</h4>
+              <p>Our field team conducts real interviews with business owners — capturing voice, history, and sentiment that no form can replicate.</p>
+            </div>
+          </div>
+          <div class="story-feature">
+            <div class="story-feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+            <div>
+              <h4>Living History That Updates</h4>
+              <p>Owners update their own pages — new dishes, seasonal offerings, apprentice stories — keeping the archive alive and current.</p>
+            </div>
+          </div>
+          <div class="story-feature">
+            <div class="story-feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
+              </svg>
+            </div>
+            <div>
+              <h4>Intergenerational Handover</h4>
+              <p>When the next generation takes over, the story continues — not starts fresh. Built-in succession storytelling for family businesses.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="story-right fade-up fade-up-delay-2">
+        <div class="story-card-stack">
+          <div class="story-card-back"></div>
+          <div class="story-card-main">
+            <div class="story-card-header">
+              <div class="story-card-eyebrow">Heritage Food · Est. 1953</div>
+              <div class="story-card-title">Nasi Ganja Yong Suan</div>
+              <div class="story-card-meta">Jalan Dato Maharajalela · Ipoh Barat</div>
+            </div>
+            <div class="story-card-content">
+              <div class="story-pullquote">
+                "My grandfather would not recognise Ipoh today. But if he tasted this rice — he would know it's still his."
+              </div>
+              <div class="story-detail-grid">
+                <div class="story-detail">
+                  <div class="story-detail-label">Founded</div>
+                  <div class="story-detail-val">1953 · 71 years</div>
+                </div>
+                <div class="story-detail">
+                  <div class="story-detail-label">Generation</div>
+                  <div class="story-detail-val">3rd · Yong Family</div>
+                </div>
+                <div class="story-detail">
+                  <div class="story-detail-label">Signature</div>
+                  <div class="story-detail-val">Nasi Ganja Rice</div>
+                </div>
+                <div class="story-detail">
+                  <div class="story-detail-label">Opens</div>
+                  <div class="story-detail-val">6am · Daily</div>
+                </div>
+              </div>
+            </div>
+            <div class="story-card-footer">
+              <div class="story-owner-row">
+                <div class="story-owner-avatar">YS</div>
+                <div>
+                  <div class="story-owner-name">Ah Suan</div>
+                  <div class="story-owner-since">Owner since 2001</div>
+                </div>
+              </div>
+              <a href="#" class="story-qr-btn">Full Profile →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Map Section -->
+<section class="section-map" id="trails">
+  <div class="section-inner">
+    <div class="map-layout">
+      <div>
+        <div class="section-tag fade-up">Heritage Trail Map</div>
+        <h2 class="fade-up" style="font-family:var(--font-display);font-size:clamp(28px,3vw,40px);font-weight:700;color:var(--charcoal);letter-spacing:-0.02em;line-height:1.15;margin-bottom:1rem;">Explore Ipoh's<br><em style="font-style:italic;color:var(--teal);">Layered History</em></h2>
+        <p class="fade-up" style="font-size:15px;color:var(--text-muted);line-height:1.75;margin-bottom:2rem;">Every colour on the map is a different trail — food, craft, history, wellness, and education — all anchored to real businesses with real stories.</p>
+
+        <div class="map-legend fade-up">
+          <div class="map-legend-item active">
+            <div class="map-legend-dot dot-heritage"></div>
+            <div class="map-legend-name">Heritage & Attractions</div>
+            <span class="map-legend-count">48</span>
+          </div>
+          <div class="map-legend-item">
+            <div class="map-legend-dot dot-food"></div>
+            <div class="map-legend-name">Food & Hawkers</div>
+            <span class="map-legend-count">92</span>
+          </div>
+          <div class="map-legend-item">
+            <div class="map-legend-dot dot-accommodation"></div>
+            <div class="map-legend-name">Stay & Lodges</div>
+            <span class="map-legend-count">24</span>
+          </div>
+          <div class="map-legend-item">
+            <div class="map-legend-dot dot-wellness"></div>
+            <div class="map-legend-name">Wellness & Care</div>
+            <span class="map-legend-count">19</span>
+          </div>
+          <div class="map-legend-item">
+            <div class="map-legend-dot dot-training"></div>
+            <div class="map-legend-name">Education & Training</div>
+            <span class="map-legend-count">18</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="map-visual fade-up fade-up-delay-2">
+        <div class="map-svg-container">
+          <!-- Simplified Ipoh map representation -->
+          <svg viewBox="0 0 460 500" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
+            <defs>
+              <filter id="pin-shadow" x="-50%" y="-50%" width="200%" height="200%">
+                <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="rgba(0,0,0,0.15)"/>
+              </filter>
+            </defs>
+
+            <!-- Road network - simplified -->
+            <g stroke="#CBD5DA" stroke-width="8" stroke-linecap="round" fill="none" opacity="0.6">
+              <!-- Main N-S road -->
+              <line x1="230" y1="20" x2="230" y2="480"/>
+              <!-- E-W roads -->
+              <line x1="40" y1="150" x2="420" y2="150"/>
+              <line x1="60" y1="250" x2="400" y2="250"/>
+              <line x1="80" y1="350" x2="380" y2="350"/>
+              <!-- Diagonal/curved roads -->
+              <path d="M120 100 Q180 180 200 250 Q220 320 190 420" stroke-width="6"/>
+              <path d="M340 80 Q300 160 310 250 Q320 340 360 430" stroke-width="6"/>
+            </g>
+
+            <!-- Secondary roads -->
+            <g stroke="#E8EDEF" stroke-width="5" stroke-linecap="round" fill="none">
+              <line x1="130" y1="50" x2="130" y2="460"/>
+              <line x1="330" y1="50" x2="330" y2="460"/>
+              <line x1="40" y1="200" x2="420" y2="200"/>
+              <line x1="40" y1="300" x2="420" y2="300"/>
+              <line x1="40" y1="400" x2="420" y2="400"/>
+            </g>
+
+            <!-- City block fills -->
+            <g fill="#E0F2F5" opacity="0.5">
+              <rect x="80" y="160" width="100" height="80" rx="4"/>
+              <rect x="250" y="160" width="80" height="80" rx="4"/>
+              <rect x="140" y="260" width="80" height="70" rx="4"/>
+              <rect x="260" y="260" width="100" height="70" rx="4"/>
+              <rect x="90" y="310" width="90" height="80" rx="4"/>
+              <rect x="270" y="360" width="80" height="60" rx="4"/>
+            </g>
+
+            <!-- River (Kinta River stylized) -->
+            <path d="M60 80 Q100 120 140 180 Q170 230 160 300 Q150 360 170 440" 
+              stroke="#0D7A8A" stroke-width="14" fill="none" opacity="0.15" stroke-linecap="round"/>
+            <path d="M60 80 Q100 120 140 180 Q170 230 160 300 Q150 360 170 440" 
+              stroke="#0D7A8A" stroke-width="6" fill="none" opacity="0.25" stroke-linecap="round"
+              stroke-dasharray="none"/>
+
+            <!-- Map pins — Heritage (teal) -->
+            <g filter="url(#pin-shadow)">
+              <circle cx="230" cy="145" r="10" fill="#0A5C6B"/>
+              <circle cx="230" cy="145" r="5" fill="white"/>
+              <circle cx="180" cy="190" r="10" fill="#0A5C6B"/>
+              <circle cx="180" cy="190" r="5" fill="white"/>
+              <circle cx="290" cy="220" r="10" fill="#0A5C6B"/>
+              <circle cx="290" cy="220" r="5" fill="white"/>
+              <circle cx="320" cy="170" r="10" fill="#0A5C6B"/>
+              <circle cx="320" cy="170" r="5" fill="white"/>
+            </g>
+
+            <!-- Map pins — Food (gold) -->
+            <g filter="url(#pin-shadow)">
+              <circle cx="155" cy="248" r="10" fill="#C9963A"/>
+              <circle cx="155" cy="248" r="5" fill="white"/>
+              <circle cx="260" cy="245" r="10" fill="#C9963A"/>
+              <circle cx="260" cy="245" r="5" fill="white"/>
+              <circle cx="210" cy="300" r="10" fill="#C9963A"/>
+              <circle cx="210" cy="300" r="5" fill="white"/>
+              <circle cx="360" cy="255" r="10" fill="#C9963A"/>
+              <circle cx="360" cy="255" r="5" fill="white"/>
+              <circle cx="140" cy="345" r="10" fill="#C9963A"/>
+              <circle cx="140" cy="345" r="5" fill="white"/>
+            </g>
+
+            <!-- Map pins — Accommodation (green) -->
+            <g filter="url(#pin-shadow)">
+              <circle cx="340" cy="140" r="10" fill="#1A7A4A"/>
+              <circle cx="340" cy="140" r="5" fill="white"/>
+              <circle cx="100" cy="260" r="10" fill="#1A7A4A"/>
+              <circle cx="100" cy="260" r="5" fill="white"/>
+              <circle cx="310" cy="380" r="10" fill="#1A7A4A"/>
+              <circle cx="310" cy="380" r="5" fill="white"/>
+            </g>
+
+            <!-- Map pins — Wellness (purple) -->
+            <g filter="url(#pin-shadow)">
+              <circle cx="200" cy="390" r="10" fill="#9B59B6"/>
+              <circle cx="200" cy="390" r="5" fill="white"/>
+              <circle cx="360" cy="320" r="10" fill="#9B59B6"/>
+              <circle cx="360" cy="320" r="5" fill="white"/>
+            </g>
+
+            <!-- Map pins — Training (orange) -->
+            <g filter="url(#pin-shadow)">
+              <circle cx="120" cy="165" r="10" fill="#E67E22"/>
+              <circle cx="120" cy="165" r="5" fill="white"/>
+              <circle cx="370" cy="195" r="10" fill="#E67E22"/>
+              <circle cx="370" cy="195" r="5" fill="white"/>
+            </g>
+
+            <!-- Area label -->
+            <rect x="185" y="125" width="90" height="20" rx="4" fill="rgba(10,92,107,0.85)"/>
+            <text x="230" y="139" text-anchor="middle" fill="white" font-size="10" font-family="DM Sans, sans-serif" font-weight="600">Old Town Ipoh</text>
+
+            <rect x="220" y="275" width="80" height="18" rx="4" fill="rgba(0,0,0,0.4)"/>
+            <text x="260" y="288" text-anchor="middle" fill="white" font-size="9" font-family="DM Sans, sans-serif">New Town</text>
+
+            <!-- Compass -->
+            <g transform="translate(420, 40)">
+              <circle cx="0" cy="0" r="16" fill="white" stroke="#E8EDEF" stroke-width="1"/>
+              <text x="0" y="-6" text-anchor="middle" fill="#0A5C6B" font-size="9" font-family="DM Sans, sans-serif" font-weight="700">N</text>
+              <line x1="0" y1="-4" x2="0" y2="4" stroke="#0A5C6B" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="-4" y1="0" x2="4" y2="0" stroke="#CBD5DA" stroke-width="1.5" stroke-linecap="round"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Elderly Programme Section -->
+<section class="section-elderly" id="elderly">
+  <div class="section-inner">
+    <div class="elderly-layout">
+
+      <div class="elderly-cards fade-up">
+        <div class="elderly-card">
+          <div class="elderly-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>
+            </svg>
+          </div>
+          <h4>Digital Literacy Training</h4>
+          <p>Elderly SME owners receive hands-on training to manage their own PerakQR profiles — updating hours, uploading photos, and sharing their story.</p>
+        </div>
+
+        <div class="elderly-card">
+          <div class="elderly-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
+            </svg>
+          </div>
+          <h4>Income Generation</h4>
+          <p>Platform visibility translates to footfall. Elderly operators connected to tourism circuits see measurable income uplift through the PerakQR network.</p>
+        </div>
+
+        <div class="elderly-card">
+          <div class="elderly-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </div>
+          <h4>Aging in Place Support</h4>
+          <p>PAWE and KRT partnerships ensure elderly operators have community support — not just digital — keeping them active, connected, and productive.</p>
+        </div>
+
+        <div class="elderly-card span2">
+          <div class="span2-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <div>
+            <h4>Powered by Yayasan Hasanah's Silver Economy Initiative</h4>
+            <p>PerakQR's elderly programme is designed in full alignment with Yayasan Hasanah's myHarapan grant framework — positioning heritage SMEs as the engine of Perak's silver economy.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="fade-up fade-up-delay-2">
+        <div class="section-tag">Elderly Programme</div>
+        <h2 style="font-family:var(--font-display);font-size:clamp(28px,3vw,42px);font-weight:700;color:var(--charcoal);letter-spacing:-0.02em;line-height:1.1;margin-bottom:1rem;">
+          Seniors as<br><em style="font-style:italic;color:var(--teal);">Protagonists,</em><br>Not Beneficiaries
+        </h2>
+        <div class="divider"></div>
+        <p style="font-size:15px;color:var(--text-muted);line-height:1.8;margin-bottom:1.5rem;">
+          The most valuable heritage in Perak lives in the hands and memories of its elderly entrepreneurs. PerakQR doesn't serve them — it amplifies them.
+        </p>
+        <p style="font-size:15px;color:var(--text-muted);line-height:1.8;margin-bottom:2rem;">
+          From digital literacy to income generation, the programme is built around the <strong style="color:var(--charcoal);font-weight:600;">Silver Economy</strong> model — where age is an asset, not a barrier.
+        </p>
+        <a href="#" class="btn-primary" style="display:inline-block;background:var(--teal);color:white;font-size:14px;font-weight:700;padding:14px 28px;border-radius:8px;text-decoration:none;">Join the Programme →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SME Portal CTA -->
+<section class="section-sme" id="sme">
+  <div class="section-inner">
+    <div class="sme-card fade-up">
+      <div class="sme-left">
+        <div class="section-tag">For Business Owners</div>
+        <h2>Get Your Business on<br>the <em>PerakQR</em> Platform</h2>
+        <p>Whether you're a 3rd-generation kopitiam or a freshly opened batik workshop — if you have a story worth telling, PerakQR is where it belongs. Registration is free for heritage SMEs in Perak.</p>
+        <div class="sme-actions">
+          <a href="#" class="btn-sme-primary">Register Free →</a>
+          <a href="#" class="btn-sme-ghost">See How It Works</a>
+        </div>
+      </div>
+
+      <div class="sme-right">
+        <div class="sme-steps">
+          <div class="sme-step">
+            <div class="sme-step-num">1</div>
+            <div>
+              <h4>Submit Your Business</h4>
+              <p>Fill in a short form — business name, location, founding year, and what makes you special.</p>
+            </div>
+          </div>
+          <div class="sme-step">
+            <div class="sme-step-num">2</div>
+            <div>
+              <h4>Our Team Visits You</h4>
+              <p>A PerakQR field officer comes to your shop for a 30-minute story interview and photo session.</p>
+            </div>
+          </div>
+          <div class="sme-step">
+            <div class="sme-step-num">3</div>
+            <div>
+              <h4>Your Page Goes Live</h4>
+              <p>Your full profile, story, photos, and QR code are published within 7 working days.</p>
+            </div>
+          </div>
+          <div class="sme-step">
+            <div class="sme-step-num">4</div>
+            <div>
+              <h4>Visitors Find You</h4>
+              <p>Tourists, locals, and media discover your business through heritage trails, PerakQR app, and Visit Malaysia channels.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Partners -->
+<section class="section-partners">
+  <div class="section-inner">
+    <div class="partners-label">Ecosystem Partners & Supporters</div>
+    <div class="partners-row">
+      <div class="partner-badge">Yayasan Hasanah</div>
+      <div class="partner-badge">myHarapan</div>
+      <div class="partner-badge">Visit Malaysia 2026</div>
+      <div class="partner-badge">PAWE Perak</div>
+      <div class="partner-badge">Majlis Bandaraya Ipoh</div>
+      <div class="partner-badge">KRT Ipoh</div>
+      <div class="partner-badge">Tourism Perak</div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="footer-logo-box">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <rect x="3" y="3" width="6" height="6" rx="1" fill="white" opacity="0.9"/>
+              <rect x="11" y="3" width="6" height="6" rx="1" fill="#C9963A" opacity="0.9"/>
+              <rect x="3" y="11" width="6" height="6" rx="1" fill="#C9963A" opacity="0.9"/>
+              <rect x="11" y="11" width="6" height="6" rx="1" fill="white" opacity="0.6"/>
+            </svg>
+          </div>
+          <span class="footer-logo-text">Perak<span>QR</span></span>
+        </div>
+        <div class="footer-tagline">
+          The digital heritage platform connecting Perak's living stories to the world — one scan at a time.
+        </div>
+        <div class="footer-vm26">✦ Official VM2026 Digital Partner</div>
+      </div>
+
+      <div class="footer-col">
+        <h5>Explore</h5>
+        <ul>
+          <li><a href="#">Heritage Trails</a></li>
+          <li><a href="#">Food & Hawkers</a></li>
+          <li><a href="#">Craft & Trades</a></li>
+          <li><a href="#">Accommodation</a></li>
+          <li><a href="#">Training Centres</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>For SMEs</h5>
+        <ul>
+          <li><a href="#">Register Business</a></li>
+          <li><a href="#">Elderly Programme</a></li>
+          <li><a href="#">Content Guidelines</a></li>
+          <li><a href="#">Business Dashboard</a></li>
+          <li><a href="#">Success Stories</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>About</h5>
+        <ul>
+          <li><a href="#">About PerakQR</a></li>
+          <li><a href="#">DiPurba Initiative</a></li>
+          <li><a href="#">Yayasan Hasanah</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Press Kit</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 PerakQR · A DiPurba Initiative · Powered by KULQR Technology</div>
+      <div class="footer-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Bahasa Malaysia</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Scroll animation
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Map legend interactivity
+document.querySelectorAll('.map-legend-item').forEach(item => {
+  item.addEventListener('click', () => {
+    document.querySelectorAll('.map-legend-item').forEach(i => i.classList.remove('active'));
+    item.classList.add('active');
+  });
+});
+
+// Smooth scroll for nav links
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', (e) => {
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// Nav scroll shadow
+window.addEventListener('scroll', () => {
+  const nav = document.querySelector('nav');
+  if (window.scrollY > 30) {
+    nav.style.borderBottomColor = 'rgba(201, 150, 58, 0.25)';
+  } else {
+    nav.style.borderBottomColor = 'rgba(201, 150, 58, 0.15)';
+  }
+});
+</script>
+</body>
+</html>
