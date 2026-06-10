@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PerakQR Experience – Preserving Stories, Connecting Generations</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --heritage-teal: #0A2E35;
+  --heritage-gold: #B3862B;
+  --heritage-cream: #F9F7F2;
+  --heritage-dark: #1A1A1A;
+  --text-main: #2D3E46;
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'DM Sans', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: var(--font-body);
+  background: var(--heritage-cream);
+  color: var(--text-main);
+  line-height: 1.6;
+  font-size: 18px;
+}
+
+/* ─── NAVIGATION (Aligned with Proposal) ─── */
+nav {
+  position: sticky; top: 0; z-index: 1000;
+  background: white; border-bottom: 4px solid var(--heritage-gold);
+  padding: 1rem 2rem;
+}
+.nav-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.logo { font-family: var(--font-display); font-size: 24px; font-weight: 900; color: var(--heritage-teal); text-decoration: none; }
+.logo span { color: var(--heritage-gold); }
+
+/* ─── HERO: THE EXPERIENCE (PDF Page 1) ─── */
+.hero {
+  padding: 100px 2rem;
+  background: linear-gradient(rgba(10, 46, 53, 0.9), rgba(10, 46, 53, 0.9)), url('https://www.tourism.gov.my/images/default-source/destination/ipoh-railway-station.jpg?sfvrsn=7e3d1c1c_2');
+  background-size: cover; background-position: center;
+  color: white; text-align: center;
+}
+.hero-tagline { font-weight: 700; letter-spacing: 3px; color: var(--heritage-gold); text-transform: uppercase; margin-bottom: 1rem; }
+.hero h1 { font-family: var(--font-display); font-size: clamp(40px, 8vw, 75px); line-height: 1.1; margin-bottom: 20px; }
+.hero p { max-width: 800px; margin: 0 auto 30px; font-size: 20px; opacity: 0.9; }
+
+/* ─── THE 10 SIGNATURE PLACES (PDF Page 9) ─── */
+.trail-section { padding: 80px 2rem; max-width: 1300px; margin: 0 auto; }
+.trail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px; margin-top: 40px;
+}
+.trail-stop {
+  background: white; border: 1px solid #e0dcd0; padding: 20px;
+  border-radius: 4px; transition: 0.3s; position: relative;
+}
+.trail-stop:hover { border-color: var(--heritage-gold); transform: translateY(-5px); }
+.stop-number {
+  background: var(--heritage-gold); color: white; width: 35px; height: 35px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%; font-weight: 900; margin-bottom: 15px;
+}
+.trail-stop h3 { font-family: var(--font-display); font-size: 20px; color: var(--heritage-teal); margin-bottom: 8px; }
+.trail-stop p { font-size: 14px; color: #666; line-height: 1.4; }
+
+/* ─── MEET THE STORYTELLERS (PDF Page 6) ─── */
+.bg-teal { background: var(--heritage-teal); color: white; padding: 80px 2rem; }
+.storyteller-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px; margin-top: 40px;
+}
+.storyteller-card {
+  display: flex; gap: 20px; align-items: center;
+  background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px;
+}
+.storyteller-img {
+  width: 100px; height: 100px; border-radius: 50%; background: #ddd;
+  flex-shrink: 0; border: 3px solid var(--heritage-gold);
+  display: flex; align-items: center; justify-content: center; font-size: 40px;
+}
+.storyteller-card h4 { font-family: var(--font-display); font-size: 22px; color: var(--heritage-gold); }
+.storyteller-card p { font-size: 15px; opacity: 0.8; }
+
+/* ─── THE "THEN & NOW" EXPERIENCE (PDF Page 10) ─── */
+.comparison-section { padding: 80px 2rem; max-width: 1000px; margin: 0 auto; text-align: center; }
+.slider-demo {
+  width: 100%; height: 450px; background: #ddd; border-radius: 20px;
+  margin: 40px 0; position: relative; overflow: hidden;
+  border: 8px solid white; box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+.slider-label {
+    position: absolute; bottom: 20px; padding: 10px 20px;
+    background: var(--heritage-teal); color: white; font-weight: 700;
+}
+
+/* ─── INTERACTIVE MAP ─── */
+.map-section { background: #EFECE5; padding: 80px 2rem; text-align: center; }
+.map-container {
+  width: 100%; height: 500px; overflow: hidden; position: relative;
+  border: 4px solid white; border-radius: 15px; margin-top: 30px;
+}
+.map-iframe { position: absolute; top: -55px; left: 0; border: none; }
+
+/* ─── BUTTONS & UTILS ─── */
+.section-tag { color: var(--heritage-gold); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; display: block; margin-bottom: 10px; }
+.btn-gold {
+  background: var(--heritage-gold); color: white; padding: 15px 35px;
+  text-decoration: none; font-weight: 700; border-radius: 4px; display: inline-block;
+  transition: 0.3s;
+}
+.btn-gold:hover { background: #8e6a22; }
+
+footer { background: var(--heritage-dark); color: white; padding: 60px 2rem; text-align: center; }
+.partners { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-top: 30px; opacity: 0.6; }
+
+@media (max-width: 768px) {
+  .hero h1 { font-size: 42px; }
+  .trail-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">Perak<span>QR</span> Experience</a>
+    <div style="display: flex; gap: 20px;">
+      <a href="#trail" style="text-decoration:none; color:inherit; font-weight:700;">The Trail</a>
+      <a href="#storytellers" style="text-decoration:none; color:inherit; font-weight:700;">Storytellers</a>
+      <a href="#impact" style="text-decoration:none; color:inherit; font-weight:700;">Our Impact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-tagline">Active Ageing • Digital Heritage</div>
+  <h1>Preserving Stories. <br>Connecting Generations.</h1>
+  <p>An interactive digital journey through Ipoh as seen through the memories and experiences of the people who lived it.</p>
+  <a href="#trail" class="btn-gold">Explore the 10 Signature Stops</a>
+</header>
+
+<!-- THE SIGNATURE TRAIL (PDF Page 9) -->
+<section class="trail-section" id="trail">
+  <span class="section-tag">The Inaugural Trail</span>
+  <h2 style="font-family: var(--font-display); font-size: 42px; color: var(--heritage-teal);">10 Places. Countless Stories.</h2>
+  <p>Rather than focusing solely on buildings, our trail focuses on human experiences.</p>
+  
+  <div class="trail-grid">
+    <div class="trail-stop">
+      <div class="stop-number">1</div>
+      <h3>Railway Station</h3>
+      <p>Gateway to Perak: Stories of travel, migration, and change.</p>
+    </div>
+    <div class="trail-stop">
+      <div class="stop-number">2</div>
+      <h3>Clock Tower</h3>
+      <p>The Evolution of Ipoh: How the city transformed across generations.</p>
+    </div>
+    <div class="trail-stop">
+      <div class="stop-number">3</div>
+      <h3>Concubine Lane</h3>
+      <p>Life Behind Shoplots: Family businesses and community life.</p>
+    </div>
+    <div class="trail-stop">
+      <div class="stop-number">4</div>
+      <h3>Kong Heng Square</h3>
+      <p>Growing Businesses: Stories of resilience and enterprise.</p>
+    </div>
+    <div class="trail-stop">
+      <div class="stop-number">5</div>
+      <h3>Han Chin Pet Soo</h3>
+      <p>The Tin Mining Legacy: Stories of families and transformation.</p>
+    </div>
+    <div class="trail-stop">
+      <div class="stop-number">6</div>
+      <h3>Market Lane</h3>
+      <p>A Day in Old Ipoh: Food, markets, and daily rituals.</p>
+    </div>
+    <div class="trail-stop">
+      <div class="stop-number">7</div>
+      <h3>Town Hall</h3>
+      <p>Building a Community: Stories of celebrations and civic life.</p>
+    </div>
+    <div class="trail-stop">
+      <div class="stop-number">8</div>
+      <h3>St. Michael's</h3>
+      <p>Growing Up in Ipoh: Stories of education and youth.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MEET THE STORYTELLERS (PDF Page 6) -->
+<section class="bg-teal" id="storytellers">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <span class="section-tag">Primary Beneficiaries</span>
+    <h2 style="font-family: var(--font-display); font-size: 42px; margin-bottom: 20px;">Meet the Storytellers</h2>
+    <p style="font-size: 20px; opacity: 0.9;">We recruit and train 20 senior citizens (55+) to become the custodians of our local knowledge.</p>
+
+    <div class="storyteller-grid">
+      <div class="storyteller-card">
+        <div class="storyteller-img">👴</div>
+        <div>
+          <h4>Uncle Rahman</h4>
+          <p>Retired Teacher • Ipoh Resident for 65 Years</p>
+          <p style="font-style: italic; margin-top:10px; font-size:14px;">"I share the story of the Railway Station as I remember it in 1960."</p>
+        </div>
+      </div>
+      <div class="storyteller-card">
+        <div class="storyteller-img">👵</div>
+        <div>
+          <h4>Auntie May</h4>
+          <p>Former Professional • Heritage Enthusiast</p>
+          <p style="font-style: italic; margin-top:10px; font-size:14px;">"Mapping the family businesses of Concubine Lane through my memories."</p>
+        </div>
+      </div>
+      <div class="storyteller-card">
+        <div class="storyteller-img">👴</div>
+        <div>
+          <h4>Mr. Singh</h4>
+          <p>Community Leader • Cultural Practitioner</p>
+          <p style="font-style: italic; margin-top:10px; font-size:14px;">"Little India: A story of commerce, culture, and belonging."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THEN & NOW DEMO (PDF Page 10) -->
+<section class="comparison-section">
+    <span class="section-tag">Interactive Documentation</span>
+    <h2 style="font-family: var(--font-display); font-size: 42px; color: var(--heritage-teal);">Bringing Stories to Life</h2>
+    <p>Using technology to compare historic photographs with modern-day reality.</p>
+    
+    <div class="slider-demo">
+        <div style="width: 50%; height: 100%; position: absolute; left: 0; background: url('https://upload.wikimedia.org/wikipedia/commons/3/30/Ipoh_Railway_Station_in_1920s.jpg') center; background-size: cover;">
+            <div class="slider-label" style="left: 20px;">THEN: 1920</div>
+        </div>
+        <div style="width: 50%; height: 100%; position: absolute; right: 0; background: url('https://www.tourism.gov.my/images/default-source/destination/ipoh-railway-station.jpg') center; background-size: cover; border-left: 4px solid var(--heritage-gold);">
+            <div class="slider-label" style="right: 20px;">NOW: 2024</div>
+        </div>
+    </div>
+    <p>Scan a QR code on-site to unlock the audio narration of this transition.</p>
+</section>
+
+<!-- THE MAP (EMBEDDED) -->
+<section class="map-section">
+  <span class="section-tag">Digital Trail</span>
+  <h2 style="font-family: var(--font-display); font-size: 42px; color: var(--heritage-teal);">Navigate the Experience</h2>
+  
+  <div class="map-container">
+    <iframe 
+      src="https://www.google.com/maps/d/embed?mid=1j7pmtZslbshm6jRQuQChq0i5cTpQSNM&ehbc=2E312F" 
+      width="100%" 
+      height="560" 
+      class="map-iframe">
+    </iframe>
+  </div>
+</section>
+
+<!-- IMPACT (PDF Page 11) -->
+<section class="trail-section" id="impact" style="text-align: center;">
+    <span class="section-tag">How We Measure Success</span>
+    <h2 style="font-family: var(--font-display); font-size: 42px; color: var(--heritage-teal);">The Ripple Effect</h2>
+    <div style="display: flex; justify-content: center; gap: 50px; margin-top: 40px; flex-wrap: wrap;">
+        <div><h3 style="font-size: 50px; color: var(--heritage-gold);">20</h3><p>Seniors Empowered</p></div>
+        <div><h3 style="font-size: 50px; color: var(--heritage-gold);">100+</h3><p>Stories Documented</p></div>
+        <div><h3 style="font-size: 50px; color: var(--heritage-gold);">1000+</h3><p>Visitor Interactions</p></div>
+    </div>
+</section>
+
+<footer>
+  <p>PerakQR Experience • Preserving Stories • Celebrating Experience • Connecting Generations</p>
+  <div class="partners">
+    <span>RPA Tech Sdn Bhd</span>
+    <span>Di PURBA</span>
+    <span>M&N Collaboration</span>
+  </div>
+</footer>
+
+</body>
+</html>
