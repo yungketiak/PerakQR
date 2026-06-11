@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>PerakQR Experience | Digital Heritage Trail</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --h-teal: #0A2E35;
+            --h-gold: #B3862B;
+            --h-cream: #FAF9F6;
+            --h-cream-dark: #F2EFE9;
+            --text-main: #1A1A1A;
+            --safe-bottom: env(safe-area-inset-bottom);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--h-cream);
+            color: var(--text-main);
+            overflow: hidden; /* Prevent body scroll, use view scroll instead */
+            height: 100vh;
+        }
+
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+
+        /* ─── HEADER ─── */
+        header {
+            padding: 20px;
+            background: white;
+            border-bottom: 4px solid var(--h-gold);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+        .brand-box { display: flex; flex-direction: column; }
+        .brand-title { font-size: 1.3rem; font-weight: 900; color: var(--h-teal); line-height: 1; }
+        .brand-sub { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px; color: var(--h-gold); font-weight: 700; }
+
+        /* ─── VIEW SYSTEM ─── */
+        .app-view {
+            display: none;
+            height: calc(100vh - 160px); /* Subtract header and nav */
+            overflow-y: auto;
+            padding: 20px;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        .app-view.active { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* ─── TRAIL VIEW (VIEW 1) ─── */
+        .stop-card {
+            background: white; border-radius: 15px; margin-bottom: 20px;
+            display: flex; gap: 15px; padding: 12px; border: 1px solid #eee;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+        .stop-number { 
+            width: 40px; height: 40px; background: var(--h-teal); color: white;
+            border-radius: 10px; display: flex; align-items: center; justify-content: center;
+            font-weight: 900; flex-shrink: 0;
+        }
+        .stop-info h3 { font-size: 1rem; color: var(--h-teal); }
+        .stop-info p { font-size: 0.75rem; color: var(--h-gold); font-weight: 700; text-transform: uppercase; }
+
+        /* ─── SCANNER VIEW (VIEW 2) ─── */
+        .scanner-container {
+            height: 100%; background: #000; border-radius: 20px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            color: white; text-align: center; position: relative; overflow: hidden;
+        }
+        .scan-frame {
+            width: 200px; height: 200px; border: 4px solid var(--h-gold);
+            border-radius: 20px; position: relative; margin-bottom: 30px;
+        }
+        .scan-line {
+            width: 100%; height: 2px; background: var(--h-gold);
+            position: absolute; top: 0; animation: scanMove 2s infinite linear;
+        }
+        @keyframes scanMove { 0% { top: 0; } 100% { top: 100%; } }
+
+        /* ─── SENIORS VIEW (VIEW 3) ─── */
+        .senior-profile {
+            background: white; border-radius: 15px; padding: 20px; margin-bottom: 15px;
+            display: flex; align-items: center; gap: 15px; border-left: 5px solid var(--h-gold);
+        }
+        .senior-avatar { width: 60px; height: 60px; border-radius: 50%; background: var(--h-cream-dark); border: 2px solid var(--h-gold); }
+        .senior-stats { display: flex; gap: 10px; margin-top: 10px; }
+        .stat-badge { font-size: 0.6rem; padding: 4px 8px; background: var(--h-cream-dark); border-radius: 4px; font-weight: 700; }
+
+        /* ─── REFLECT VIEW (VIEW 4) ─── */
+        .reflection-wall { display: grid; gap: 15px; }
+        .reflection-card { background: white; padding: 15px; border-radius: 15px; border: 1px solid #ddd; position: relative; }
+        .reflection-card::before { content: '"'; position: absolute; top: 10px; left: 10px; font-size: 2rem; color: var(--h-gold); opacity: 0.2; }
+        .visitor-meta { font-size: 0.7rem; font-weight: 700; color: var(--h-teal); margin-top: 10px; display: block; }
+
+        /* ─── STORY OVERLAY ─── */
+        #storyOverlay {
+            position: fixed; inset: 0; background: var(--h-cream); z-index: 2000;
+            display: none; flex-direction: column; transform: translateY(100%); transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        #storyOverlay.active { display: flex; transform: translateY(0); }
+
+        /* ─── APP NAV ─── */
+        .bottom-nav {
+            position: fixed; bottom: 0; left: 0; right: 0; height: 80px;
+            background: white; border-top: 1px solid #eee;
+            display: flex; justify-content: space-around; align-items: center;
+            padding-bottom: var(--safe-bottom); z-index: 1000;
+        }
+        .nav-item { border: none; background: none; text-align: center; color: #999; font-weight: 700; font-size: 0.7rem; cursor: pointer; }
+        .nav-item.active { color: var(--h-teal); }
+        .nav-icon { font-size: 1.5rem; display: block; margin-bottom: 4px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand-box">
+            <span class="brand-title">Perak<span>QR</span></span>
+            <span class="brand-sub">Digital Heritage</span>
+        </div>
+        <div style="font-size: 0.8rem; background: var(--h-gold); color: white; padding: 5px 10px; border-radius: 20px; font-weight: 900;">LIVE</div>
+    </header>
+
+    <!-- VIEW 1: THE TRAIL -->
+    <div id="view-trail" class="app-view active">
+        <h2 style="margin-bottom: 20px;">Inaugural Trail</h2>
+        <div id="trailList">
+            <!-- Stops 1-10 will go here -->
+        </div>
+    </div>
+
+    <!-- VIEW 2: SCANNER -->
+    <div id="view-scanner" class="app-view">
+        <div class="scanner-container">
+            <div class="scan-frame"><div class="scan-line"></div></div>
+            <h3>Scan QR Code</h3>
+            <p style="opacity: 0.7; padding: 0 40px; margin-top: 10px;">Point your camera at a PerakQR code located at heritage sites in Ipoh.</p>
+        </div>
+    </div>
+
+    <!-- VIEW 3: SENIORS -->
+    <div id="view-seniors" class="app-view">
+        <h2 style="margin-bottom: 10px;">Primary Beneficiaries</h2>
+        <p style="font-size: 0.9rem; color: #666; margin-bottom: 20px;">Empowering Ipoh's seniors through digital storytelling.</p>
+        <div id="seniorList">
+            <!-- Seniors will go here -->
+        </div>
+    </div>
+
+    <!-- VIEW 4: REFLECT -->
+    <div id="view-reflect" class="app-view">
+        <h2 style="margin-bottom: 20px;">Community Reflections</h2>
+        <div class="reflection-wall">
+            <div class="reflection-card">
+                "Listening to Bro. Patrick talk about St. Michael's made me realize how much history is in these walls."
+                <span class="visitor-meta">— Wei Kang, Student</span>
+            </div>
+            <div class="reflection-card">
+                "I've walked past this station 100 times, but I never knew about the travelers from 1958."
+                <span class="visitor-meta">— Sarah J., Tourist</span>
+            </div>
+            <div class="reflection-card">
+                "As an elderly resident, seeing my friends share their stories makes me feel proud of our city."
+                <span class="visitor-meta">— Uncle Lim, Retired</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTTOM NAVIGATION -->
+    <nav class="bottom-nav">
+        <button class="nav-item active" onclick="switchView('trail')">
+            <span class="nav-icon">📍</span>Trail
+        </button>
+        <button class="nav-item" onclick="switchView('scanner')">
+            <span class="nav-icon">🤳</span>Scanner
+        </button>
+        <button class="nav-item" onclick="switchView('seniors')">
+            <span class="nav-icon">👵</span>Seniors
+        </button>
+        <button class="nav-item" onclick="switchView('reflect')">
+            <span class="nav-icon">💬</span>Reflect
+        </button>
+    </nav>
+
+    <!-- STORY MODAL (Same as before but integrated) -->
+    <div id="storyOverlay">
+        <!-- Re-using previous popup structure for consistency -->
+        <div style="padding: 20px; background: white; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
+            <h3 id="overlayTitle">Story</h3>
+            <button onclick="closeOverlay()" style="border:none; background:none; font-size:1.5rem;">✕</button>
+        </div>
+        <div style="padding: 20px; overflow-y: auto;" id="overlayBody">
+            <!-- Dynamic Content -->
+        </div>
+    </div>
+
+    <script>
+        const stopsData = [
+            { id: 1, name: "Railway Station", theme: "Travel & Migration", narrator: "Uncle Rahman" },
+            { id: 2, name: "Birch Clock Tower", theme: "Evolution of Ipoh", narrator: "Mr. Lim" },
+            { id: 3, name: "Concubine Lane", theme: "Life Behind Shoplots", narrator: "Auntie May" },
+            { id: 4, name: "Kong Heng Square", theme: "Enterprise", narrator: "Uncle Robert" },
+            { id: 5, name: "Han Chin Pet Soo", theme: "Tin Mining", narrator: "Master Tan" },
+            { id: 6, name: "Market Lane", theme: "A Day in Old Ipoh", narrator: "Auntie Leong" },
+            { id: 7, name: "Town Hall Precinct", theme: "Community", narrator: "Major Ismail" },
+            { id: 8, name: "St. Michael's", theme: "Education", narrator: "Bro. Patrick" },
+            { id: 9, name: "D.R. Seenivasagam Park", theme: "Recreation", narrator: "Madam Chandra" },
+            { id: 10, name: "Little India", theme: "Culture", narrator: "Mr. Singh" }
+        ];
+
+        const seniorsData = [
+            { name: "Uncle Rahman", role: "Retired Teacher", stories: 12, impact: "Community Mentor" },
+            { name: "Auntie May", role: "Former Professional", stories: 8, impact: "Heritage Guardian" },
+            { name: "Bro. Patrick", role: "Educational Staff", stories: 15, impact: "Youth Inspiration" },
+            { name: "Mr. Singh", role: "Community Leader", stories: 10, impact: "Cultural Ambassador" }
+        ];
+
+        function switchView(viewId) {
+            // Remove active classes
+            document.querySelectorAll('.app-view').forEach(v => v.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+
+            // Set new active
+            document.getElementById('view-' + viewId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        function renderApp() {
+            // Render Trail Stops
+            const trailList = document.getElementById('trailList');
+            trailList.innerHTML = stopsData.map(s => `
+                <div class="stop-card" onclick="openStop(${s.id})">
+                    <div class="stop-number">${s.id}</div>
+                    <div class="stop-info">
+                        <p>${s.theme}</p>
+                        <h3>${s.name}</h3>
+                        <span style="font-size:0.7rem; color:#888;">Narrated by ${s.narrator}</span>
+                    </div>
+                </div>
+            `).join('');
+
+            // Render Seniors
+            const seniorList = document.getElementById('seniorList');
+            seniorList.innerHTML = seniorsData.map(s => `
+                <div class="senior-profile">
+                    <div class="senior-avatar" style="display:flex;align-items:center;justify-content:center;font-size:1.5rem;">👴</div>
+                    <div style="flex:1;">
+                        <h4 style="color:var(--h-teal);">${s.name}</h4>
+                        <p style="font-size:0.75rem; color:#666;">${s.role}</p>
+                        <div class="senior-stats">
+                            <span class="stat-badge">${s.stories} Stories Published</span>
+                            <span class="stat-badge" style="background:#e8f4f1; color:var(--h-teal);">${s.impact}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openStop(id) {
+            const stop = stopsData.find(s => s.id === id);
+            document.getElementById('overlayTitle').innerText = stop.name;
+            document.getElementById('overlayBody').innerHTML = `
+                <div style="height:200px; background:#ddd; border-radius:15px; margin-bottom:20px; display:flex; align-items:center; justify-content:center; font-size:3rem;">🏞️</div>
+                <h4 style="color:var(--h-gold); text-transform:uppercase; font-size:0.8rem; margin-bottom:10px;">${stop.theme}</h4>
+                <p style="font-size:1.1rem; line-height:1.6; margin-bottom:20px;">"This location holds the memory of ${stop.theme} as experienced by ${stop.narrator}."</p>
+                <div style="background:var(--h-teal); color:white; padding:15px; border-radius:10px; display:flex; align-items:center; gap:15px;">
+                    <div style="font-size:1.5rem;">▶</div>
+                    <div>
+                        <p style="font-weight:700;">Listen to ${stop.narrator}'s Voice</p>
+                        <p style="font-size:0.7rem; opacity:0.8;">Part of the Digital Storytelling Initiative</p>
+                    </div>
+                </div>
+            `;
+            const overlay = document.getElementById('storyOverlay');
+            overlay.style.display = 'flex';
+            setTimeout(() => overlay.classList.add('active'), 10);
+        }
+
+        function closeOverlay() {
+            const overlay = document.getElementById('storyOverlay');
+            overlay.classList.remove('active');
+            setTimeout(() => overlay.style.display = 'none', 400);
+        }
+
+        renderApp();
+    </script>
+</body>
+</html>
